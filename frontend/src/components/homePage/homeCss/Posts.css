@@ -1,0 +1,33 @@
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .post {
+    width: 100%;
+    max-width: 600px;
+    border: 1px solid #ccc;
+    margin: 16px;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  
+  .user-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  
+  .profile-image {
+    width: 50px; /* Adjust the size as needed */
+    height: 50px; /* Adjust the size as needed */
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover;
+    border: 2px solid #fff; /* Add a border to the circle if desired */
+  }
+  
+  /* Add styles for other sections (post-image, post-icons, likes, caption, comments) as needed */
+  

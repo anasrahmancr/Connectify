@@ -1,10 +1,10 @@
 import express from "express";
-import { loginData, signupData } from "../controllers/authControllers.js";
+import { userLogin, userRegister } from "../controllers/user.js";
 
 const router = express.Router();
 
-router.post('/loginData', loginData);
-router.post('/signupData', signupData);
+router.post('/userLogin', userLogin);
+router.post('/userRegister', userRegister);
 
 
  

@@ -1,6 +1,7 @@
 import express from "express";
 import userRoutes from './routes/user.js';
-import homeRoutes from './routes/home.js';
+import postRoutes from './routes/posts.js';
+import adminRoutes from './routes/admin.js';
 import dotenv from 'dotenv';
 import connectDB from "./config/database.js";
 import cors from 'cors';
@@ -17,7 +18,8 @@ app.use(cors({
     credentials : true,
 }))
 app.use('/api/user',userRoutes);
-app.use('/api/home', homeRoutes);
+app.use('/api/posts', postRoutes);
+app.use('/api/admin', adminRoutes);
 
 
 const PORT = 5000;

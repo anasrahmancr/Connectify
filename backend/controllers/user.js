@@ -2,11 +2,13 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import User from '../model/user.js';
 
-const userLogin = async (req, res) => {
-  console.log(req.body);
-  try {
+const userLogin = async (req, res) => { 
+  try { 
     const { email, password } = req.body;
-    const user = await User.findOne({ email: email });
+    if (!email || !password) {
+      return res.status(400).json({ success: false, message: 'Email and password are required.' });
+    }
+    const user = await User.findOne({email: email});
 
     if (!user) {
       return res.status(404).json({ success: false, message: 'Email not found.' });
@@ -19,7 +21,7 @@ const userLogin = async (req, res) => {
     }
 
     const key = process.env.JWT_SECRET;
-    const token = jwt.sign({ user_id: user._id, email }, key, { expiresIn: '24h' });
+    const token = jwt.sign({ user_id: user._id, email: email }, key, { expiresIn: '24h' });
     console.log(token);
 
     res.cookie('token', token, { httpOnly: true });
@@ -27,7 +29,7 @@ const userLogin = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: 'Login successful',
-      user,
+      // user,
     });
   } catch (error) {
     console.error(error);

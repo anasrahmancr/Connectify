@@ -4,7 +4,7 @@ const statusSchema = new Schema({
     userId: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
     image: {type: Array},
     caption: {type: String},
-    createdAt: { type: Date, default: Date.now},
+    createdAt: { type: Date, default: Date.now}, 
     updatedAt: { type: Date, default: Date.now },
 })
 

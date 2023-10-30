@@ -7,9 +7,8 @@ import connectDB from "./config/database.js";
 import cors from 'cors';
 import cookieParser from "cookie-parser";
 const app = express();
-
 dotenv.config();
-connectDB();
+connectDB();    
 
 app.use(express.json());
 app.use(cookieParser());

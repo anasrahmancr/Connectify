@@ -1,35 +1,46 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [error, setError] = useState('');
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        console.log('test entryyyyyyyyy');
         console.log(name, email, password);
       const response = await axios.post(
-        "http://localhost:5000/api/user/signupData",
+        "http://localhost:5000/api/user/userRegister",
         {name, email, password}
       );
-      
+      if(response.data.success){
+        toast.success("Account created successfully", {
+          position: "top-center",
+          autoClose: 3000, // Auto close after 3 seconds
+        });
+      }
       console.log(response);
       navigate("/");
 
       // Handle successful login, e.g., redirect to dashboard
     } catch (error) {
-      console.error("Register failed:", error.message);
-      // Handle login error, e.g., show an error message
+      setError(error.response.data.message)
+      toast.error(error, {
+        position: "top-center",
+        autoClose: 3000,
+      });
     }
   };
 
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-slate-400">
+    <div className="flex min-h-full w-96 ml-96 flex-col justify-center px-6 py-12 lg:px-8 bg-slate-400">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Register

@@ -1,37 +1,47 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/user/loginData",
+        "http://localhost:5000/api/user/userLogin",
         {email, password}, {withCredentials: true}
       );
-      
       if(response.data.success) {
+        console.log(response.data,"response.data in login");
         navigate("/home")
-         
-      } else {
-          console.log(response.data);
-        }
+        toast.success("Logged in successfully", {
+          position: " top-center",
+          autoClose: 1000, 
+        });
+        
+      } 
       
     } catch (error) {
-      setError(error.response.data.message)
-      console.error("Login failed:", error.response.data.message);
-      
+      toast.error("Internal Error", {
+        position: "top-center",
+        autoClose: 3000,
+      });
     }
+
+
+
   };
 
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-gray-500">
+    <div className="flex min-h-full w-96 ml-96  flex-col justify-center px-6 py-12 lg:px-8 bg-gray-500">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="mt-10 text-center text-2xl font-semibold leading-9 tracking-tight text-white">
           Connectify Login

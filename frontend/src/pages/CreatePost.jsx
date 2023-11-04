@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function CreatePost() {
   const navigate = useNavigate();
   const [caption, setCaption] = useState("");
-  const [image, setImage] = useState(null); // Use null instead of an empty array
+  const [image, setImage] = useState(null); 
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -22,16 +22,16 @@ function CreatePost() {
     formData.append("caption", caption);
 
     try {
-      const response = await axios.post("http://localhost:5000/api/posts/createPost", formData, {
+      const response = await axios.post("http://localhost:5000/api/posts/createPost", formData, {withCredentials: true}, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(response);
+      console.log(response,'response after create post');
       if(response.data.success){
         toast.success("Post created successfully", {
           position: "top-center",
-          autoClose: 1000, // Auto close after 3 seconds
+          autoClose: 500, // Auto close after 3 seconds
         });
         console.log(response, "resp");
         navigate('/home')

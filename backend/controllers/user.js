@@ -64,4 +64,9 @@ const userRegister = async (req, res) => {
   }
 };
 
-export { userLogin, userRegister };
+const forgotPassword = (req, res) => {
+  const {email} = req.body;
+  console.log("email => ", email);
+}
+
+export { userLogin, userRegister, forgotPassword };

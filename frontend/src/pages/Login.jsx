@@ -92,7 +92,8 @@ function Login() {
                   href="#"
                   className="font-semibold text-white hover:text-white"
                 >
-                  Forgot password?
+                <Link to='/forgot-password'>Forgot Password</Link>
+                 
                 </a>
               </div>
             </div>
